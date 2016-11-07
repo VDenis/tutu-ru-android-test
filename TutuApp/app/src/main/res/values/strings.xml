@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Tutu App</string>
+
+    <!-- Main page-->
+    <array name="navigation_drawer_titles">
+        <item name="schedule">Расписание</item>
+        <item name="about_application">О приложении</item>
+    </array>
+
+    <!-- Main page->Navigation drawer -->
+    <string name="drawer_open">Открыть панель навигации</string>
+    <string name="drawer_close">закрыть панель навигации</string>
+
+    <!-- Main page->Fragment schedule -->
+    <string name="btn_select_station_from">Откуда</string>
+    <string name="btn_select_station_to">Куда</string>
+    <string name="btn_select_date">Выбрать дату</string>
+
+    <!-- Select Page -->
+    <string name="station_from">Станция отправления</string>
+    <string name="station_to">Станция прибытия</string>
+    <string name="type_to_search_station">Введите имя станции для поиска…</string>
+
+    <!-- Detail Page -->
+    <string name="dlg_country_title">Страна: %1$s</string>
+    <string name="dlg_district_title">Район: %1$s</string>
+    <string name="dlg_city_title">Город: %1$s</string>
+    <string name="dlg_region_title">Регион: %1$s</string>
+    <string name="dlg_station_title">Станция: %1$s</string>
+
+    <!-- About page -->
+    <string name="text_about">Тестовое задание для Tutu.ru\n  Автор : Денис Власов.\n  Версия: %1$s.</string>
+    <string name="about_station_text">Информация о станции</string>
+</resources>
