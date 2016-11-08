@@ -1,25 +1,26 @@
 package com.app.denis.tutuapp.ui.selectStation;
 
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.app.denis.tutuapp.R;
 import com.app.denis.tutuapp.model.Journey;
 import com.app.denis.tutuapp.model.Station;
 import com.app.denis.tutuapp.model.StorageService;
 import com.app.denis.tutuapp.ui.detailStation.DetailStationFragment;
+import com.app.denis.tutuapp.utils.SimpleDividerItemDecoration;
+
+import java.lang.ref.WeakReference;
 
 public class SelectStationActivity extends AppCompatActivity implements StationAdapter.OnItemClickListener {
 
@@ -37,6 +38,9 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
     // Views
     private RecyclerView mStationsRecyclerView;
     private EditText mSearchText;
+
+    // Handler
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +78,33 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
 
             @Override
             public void afterTextChanged(Editable s) {
-                ((StationAdapter)mStationsRecyclerView.getAdapter()).performSearch(s.toString());
+                // use handler to post delayed messages
+                //((StationAdapter)mStationsRecyclerView.getAdapter()).performSearch(s.toString());
+                Message msg = new Message();
+                Bundle bundle = new Bundle();
+                bundle.putString(MyHandler.HANDLER_SEARCH_STRING, s.toString());
+                msg.setData(bundle);
+                mHandler.sendMessageDelayed(msg, 500);
+            }
+        });
+
+        mSearchText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    EditText et = (EditText)v;
+                    if(event.getRawX() >= (et.getRight() - et.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        et.setText("");
+                        return true;
+                    }
+                }
+                return false;
             }
         });
 
@@ -88,6 +118,9 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
             setTitle(R.string.station_to);
             mStationsRecyclerView.setAdapter(new StationAdapter(journey.getCitiesTo(), this));
         }
+
+        // Init handler
+        mHandler = new MyHandler(this);
     }
 
     // when user picked a data return to the Activity has made a request
@@ -105,7 +138,35 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
     }
 
     @Override
+    protected void onDestroy() {
+        // clean handler
+        if (mHandler != null) {
+            mHandler.removeCallbacksAndMessages(null);
+        }
+        super.onDestroy();
+    }
+
+    @Override
     public void onClickSelect(Station station) {
         returnSelectedStation(station);
+    }
+
+    static class MyHandler extends Handler {
+        static final String HANDLER_SEARCH_STRING = "HANDLER_SEARCH_STRING";
+        WeakReference<SelectStationActivity> wrActivity;
+
+        public MyHandler(SelectStationActivity activity) {
+            wrActivity = new WeakReference<SelectStationActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            SelectStationActivity activity = wrActivity.get();
+            if (activity != null) {
+                String text = msg.getData().getString(HANDLER_SEARCH_STRING, "");
+                ((StationAdapter)activity.mStationsRecyclerView.getAdapter()).performSearch(text);
+            }
+        }
     }
 }

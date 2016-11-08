@@ -1,4 +1,4 @@
-package com.app.denis.tutuapp.ui.selectStation;
+package com.app.denis.tutuapp.utils;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -13,10 +13,10 @@ import com.app.denis.tutuapp.R;
  */
 
 // Divider for Recycler view
-class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
+public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
 
-    SimpleDividerItemDecoration(Context context) {
+    public SimpleDividerItemDecoration(Context context) {
         mDivider = context.getResources().getDrawable(R.drawable.line_divider, context.getTheme());
     }
 
