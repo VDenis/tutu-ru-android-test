@@ -87,9 +87,13 @@ public class ScheduleFragment extends Fragment implements View.OnClickListener, 
         btnSelectStationTo = (Button) view.findViewById(R.id.btnSelectStationTo);
         btnSelectDate = (Button) view.findViewById(R.id.btnSelectDate);
 
-        // set text to button after rotation
-        if (mStationFrom != null && mStationTo != null) {
+        // set text to button btnSelectStationFrom after rotation
+        if (mStationFrom != null) {
             btnSelectStationFrom.setText(mStationFrom.getStationTitle());
+        }
+
+        // set text to button btnSelectStationTo after rotation
+        if (mStationTo != null) {
             btnSelectStationTo.setText(mStationTo.getStationTitle());
         }
 
