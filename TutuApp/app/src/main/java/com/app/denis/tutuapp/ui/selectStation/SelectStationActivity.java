@@ -1,6 +1,7 @@
 package com.app.denis.tutuapp.ui.selectStation;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -9,9 +10,14 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.app.denis.tutuapp.R;
 import com.app.denis.tutuapp.model.Journey;
@@ -54,17 +60,8 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
         mStationsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplication()));
 
         mSearchText = (EditText) findViewById(R.id.edit_text_search);
-        /*mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    ((StationAdapter)mStationsRecyclerView.getAdapter()).performSearch(v.getText().toString());
-                    return true;
-                }
-                return false;
-            }
-        });*/
 
+        // listen user type in edittext and peform search in adapter
         mSearchText.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -84,10 +81,15 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
                 Bundle bundle = new Bundle();
                 bundle.putString(MyHandler.HANDLER_SEARCH_STRING, s.toString());
                 msg.setData(bundle);
+
+                // delete previous message in handler and send new
+                // if user continue type station, don't do search after type every char
+                mHandler.removeMessages(msg.what, null);
                 mHandler.sendMessageDelayed(msg, 500);
             }
         });
 
+        // detect user clear edittext
         mSearchText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -103,6 +105,20 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
                         et.setText("");
                         return true;
                     }
+                }
+                return false;
+            }
+        });
+
+        // Hiding keyboard when the user presses enter button
+        mSearchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    // hide virtual keyboard
+                    InputMethodManager imm = (InputMethodManager)getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
                 }
                 return false;
             }
@@ -135,6 +151,17 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
     public void onClickShowDetail(Station station) {
         DialogFragment fragment = DetailStationFragment.newInstance(station);
         fragment.show(getFragmentManager(), DIALOG_TAG);
+    }
+
+    // if user want navigate to prev activity without selecting station
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            setResult(RESULT_CANCELED);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

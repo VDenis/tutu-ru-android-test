@@ -171,8 +171,14 @@ public class MainActivity extends AppCompatActivity implements TitleAdapter.OnIt
 
     @Override
     public void onBackPressed() {
+        // if currently navigation drawer is open - close navigation drawer
         if (mDrawerLayout.isDrawerOpen(mDrawerList)) {
             mDrawerLayout.closeDrawer(mDrawerList);
+            return;
+        } else if (getFragmentManager().findFragmentById(R.id.content_frame) instanceof AboutFragment) {
+            // if currently about page, navigate to the schedule page
+            selectItem(0);
+            return;
         }
         super.onBackPressed();
     }
