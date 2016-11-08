@@ -3,6 +3,7 @@ package com.app.denis.tutuapp;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.*;
 
 import com.app.denis.tutuapp.model.Journey;
 import com.app.denis.tutuapp.model.StorageService;
@@ -26,22 +27,5 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.app.denis.tutuapp", appContext.getPackageName());
-    }
-
-    @Test
-    public void readAssertFile() {
-        Context appContext = InstrumentationRegistry.getContext();
-        assertTrue(StorageService.loadJSONFromAsset(appContext) != null
-                && StorageService.loadJSONFromAsset(appContext).length() > 2);
-    }
-
-    @Test
-    public void convertJsonToObject() {
-        Context appContext = InstrumentationRegistry.getContext();
-        Journey journey = StorageService.getData(appContext);
-        assertNotNull(journey);
-        assertNotNull(journey.getCitiesFrom());
-        assertNotNull(journey.getCitiesTo());
-
     }
 }

@@ -1,6 +1,5 @@
 package com.app.denis.tutuapp.ui.selectStation;
 
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,10 +14,9 @@ import com.app.denis.tutuapp.model.Station;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import static com.app.denis.tutuapp.utils.Search.filter;
+import static com.app.denis.tutuapp.utils.Search.filterByStationTitle;
 
 /**
  * Created by Denis on 06.11.2016.
@@ -88,7 +86,7 @@ class StationAdapter extends RecyclerView.Adapter<StationAdapter.ViewHolder> {
     }
 
     public void performSearch(String performSearch) {
-        mDataset = filter(mFullDataset, performSearch).toArray(new Station[]{});
+        mDataset = filterByStationTitle(mFullDataset, performSearch).toArray(new Station[]{});
         notifyDataSetChanged();
     }
 

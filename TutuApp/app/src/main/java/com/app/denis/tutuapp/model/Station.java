@@ -35,6 +35,17 @@ public class Station implements Parcelable {
     private int stationId;
     private String stationTitle;
 
+    public Station(String countryTitle, Point point, String districtTitle, int cityId, String cityTitle, String regionTitle, int stationId, String stationTitle) {
+        this.countryTitle = countryTitle;
+        this.point = point;
+        this.districtTitle = districtTitle;
+        this.cityId = cityId;
+        this.cityTitle = cityTitle;
+        this.regionTitle = regionTitle;
+        this.stationId = stationId;
+        this.stationTitle = stationTitle;
+    }
+
     // Constructor for parcel
     private Station(Parcel in) {
         countryTitle = in.readString();

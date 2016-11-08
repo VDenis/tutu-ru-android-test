@@ -11,12 +11,12 @@ import java.util.List;
  */
 
 public class Search {
-    public static List<Station> filter(List<Station> dataset, String pattern) {
+    public static List<Station> filterByStationTitle(List<Station> dataset, String stationPattern) {
         List<Station> newDataset = new ArrayList<>();
         Iterator<Station> iter = dataset.iterator();
         while (iter.hasNext()) {
             Station station = iter.next();
-            if (containsIgnoreCase(station.getStationTitle(), pattern)){
+            if (containsIgnoreCase(station.getStationTitle(), stationPattern)){
                 newDataset.add(station);
             }
         }

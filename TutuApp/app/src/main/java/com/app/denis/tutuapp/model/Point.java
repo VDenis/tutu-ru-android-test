@@ -17,6 +17,11 @@ public class Point implements Parcelable {
     private double longitude;
     private double latitude;
 
+    public Point(double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
     private Point(Parcel in) {
         longitude = in.readDouble();
         latitude = in.readDouble();
