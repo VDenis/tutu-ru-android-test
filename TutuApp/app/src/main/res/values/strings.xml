@@ -20,6 +20,7 @@
     <string name="station_from">Станция отправления</string>
     <string name="station_to">Станция прибытия</string>
     <string name="type_to_search_station">Введите имя станции для поиска…</string>
+    <string name="content_description_station_details">station details</string>
 
     <!-- Detail Page -->
     <string name="dlg_country_title">Страна: %1$s</string>
@@ -29,6 +30,6 @@
     <string name="dlg_station_title">Станция: %1$s</string>
 
     <!-- About page -->
-    <string name="text_about">Тестовое задание для Tutu.ru\n  Автор : Денис Власов.\n  Версия: %1$s.</string>
+    <string name="text_about">Тестовое задание для Tutu.ru\nАвтор : Денис Власов.\nВерсия: %1$s.</string>
     <string name="about_station_text">Информация о станции</string>
 </resources>

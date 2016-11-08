@@ -22,8 +22,7 @@
         android:hint="@string/type_to_search_station"
         android:imeOptions="actionSearch"
         android:drawableEnd="@android:drawable/ic_menu_close_clear_cancel"
-        android:inputType="text"
-        android:lines="1" />
+        style="@style/SearchText" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_stations"

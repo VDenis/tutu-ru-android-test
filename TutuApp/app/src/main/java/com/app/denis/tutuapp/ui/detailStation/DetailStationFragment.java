@@ -42,7 +42,7 @@ public class DetailStationFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_station, container, false);
+        View view = inflater.inflate(R.layout.dialog_detail_station, container, false);
         TextView tv1 = (TextView) view.findViewById(R.id.textView1);
         TextView tv2 = (TextView) view.findViewById(R.id.textView2);
         TextView tv3 = (TextView) view.findViewById(R.id.textView3);

@@ -14,10 +14,65 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!-- Schedule page, button style. -->
     <style name="SelectStationButton" parent="Widget.AppCompat.EditText">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
         <item name="android:focusable">false</item>
         <item name="android:focusableInTouchMode">false</item>
         <item name="android:clickable">true</item>
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginStart">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <!-- About page, text style. -->
+    <style name="AboutPageText">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+    </style>
+
+    <!-- Navigation drawer -->
+    <!-- List -->
+    <style name="NavigationDrawerList">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:choiceMode">singleChoice</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <!-- List Item -->
+    <style name="NavigationDrawerItemText">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <!--<item name="android:background">?android:attr/activatedBackgroundIndicator</item>-->
+        <item name="android:minHeight">?android:attr/listPreferredItemHeightSmall</item>
+        <item name="android:paddingEnd">@dimen/activity_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/activity_horizontal_padding</item>
+    </style>
+
+    <!-- Detail station page -->
+    <style name="DetailStationPageText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/dialog_text_margin</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:paddingEnd">@dimen/activity_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/activity_horizontal_padding</item>
+    </style>
+
+    <!-- Select station page -->
+    <!-- Search Text -->
+    <style name="SearchText">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:inputType">text</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <!-- Result List Item-->
+    <style name="ResultListItemText">
+        <item name="android:textAppearance">?android:attr/textAppearanceListItem</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingEnd">@dimen/activity_horizontal_padding</item>
+        <item name="android:paddingStart">@dimen/activity_horizontal_padding</item>
     </style>
 </resources>
