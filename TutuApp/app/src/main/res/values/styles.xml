@@ -48,6 +48,7 @@
         <item name="android:minHeight">?android:attr/listPreferredItemHeightSmall</item>
         <item name="android:paddingEnd">@dimen/activity_horizontal_padding</item>
         <item name="android:paddingStart">@dimen/activity_horizontal_padding</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
     <!-- Detail station page -->
