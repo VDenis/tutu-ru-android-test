@@ -24,9 +24,12 @@ import com.app.denis.tutuapp.model.Journey;
 import com.app.denis.tutuapp.model.Station;
 import com.app.denis.tutuapp.model.StorageService;
 import com.app.denis.tutuapp.ui.detailStation.DetailStationFragment;
-import com.app.denis.tutuapp.utils.SimpleDividerItemDecoration;
+import com.app.denis.tutuapp.ui.selectStation.GroupStationAdapter.DividerItemDecorationByViewTypeItem;
+import com.app.denis.tutuapp.ui.selectStation.GroupStationAdapter.GroupStationAdapter;
 
 import java.lang.ref.WeakReference;
+
+import static com.app.denis.tutuapp.ui.selectStation.GroupStationAdapter.GroupStationAdapter.STATION;
 
 public class SelectStationActivity extends AppCompatActivity implements StationAdapter.OnItemClickListener {
 
@@ -57,7 +60,10 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
         Journey journey = StorageService.getData(this);
         // Setup recycler mView
         mStationsRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_stations);
-        mStationsRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(getApplication()));
+        mStationsRecyclerView.addItemDecoration(
+                new DividerItemDecorationByViewTypeItem(
+                        getApplication(), GroupStationAdapter.STATION
+                ));
 
         mSearchText = (EditText) findViewById(R.id.edit_text_search);
 
@@ -99,8 +105,8 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
                 final int DRAWABLE_BOTTOM = 3;
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    EditText et = (EditText)v;
-                    if(event.getRawX() >= (et.getRight() - et.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    EditText et = (EditText) v;
+                    if (event.getRawX() >= (et.getRight() - et.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         // your action here
                         et.setText("");
                         return true;
@@ -116,7 +122,7 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // hide virtual keyboard
-                    InputMethodManager imm = (InputMethodManager)getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    InputMethodManager imm = (InputMethodManager) getBaseContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     return true;
                 }
@@ -129,10 +135,12 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
         String direction = intent.getStringExtra(SELECT_STATION_DIRECTION);
         if (direction != null && direction.equals(SELECT_STATION_FROM)) {
             setTitle(R.string.station_from);
-            mStationsRecyclerView.setAdapter(new StationAdapter(journey.getCitiesFrom(), this));
+            //mStationsRecyclerView.setAdapter(new StationAdapter(journey.getCitiesFrom(), this));
+            mStationsRecyclerView.setAdapter(new GroupStationAdapter(journey.getCitiesFrom(), this));
         } else if (direction != null && direction.equals(SELECT_STATION_TO)) {
             setTitle(R.string.station_to);
-            mStationsRecyclerView.setAdapter(new StationAdapter(journey.getCitiesTo(), this));
+            //mStationsRecyclerView.setAdapter(new StationAdapter(journey.getCitiesTo(), this));
+            mStationsRecyclerView.setAdapter(new GroupStationAdapter(journey.getCitiesTo(), this));
         }
 
         // Init handler
@@ -192,7 +200,8 @@ public class SelectStationActivity extends AppCompatActivity implements StationA
             SelectStationActivity activity = wrActivity.get();
             if (activity != null) {
                 String text = msg.getData().getString(HANDLER_SEARCH_STRING, "");
-                ((StationAdapter)activity.mStationsRecyclerView.getAdapter()).performSearch(text);
+                //((StationAdapter)activity.mStationsRecyclerView.getAdapter()).performSearch(text);
+                ((GroupStationAdapter) activity.mStationsRecyclerView.getAdapter()).performSearch(text);
             }
         }
     }

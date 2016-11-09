@@ -9,4 +9,8 @@
     <!-- Dialog -->
     <dimen name="dialog_title_text_margin">20dp</dimen>
     <dimen name="dialog_text_margin">10dp</dimen>
+
+    <!-- headers for country, city in stations list-->
+    <dimen name="list_item_header">5dp</dimen>
+    <dimen name="list_item_sub_header_vertical_padding">25dp</dimen>
 </resources>

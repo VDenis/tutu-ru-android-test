@@ -22,7 +22,7 @@ import static com.app.denis.tutuapp.utils.Search.filterByStationTitle;
  * Created by Denis on 06.11.2016.
  */
 
-class StationAdapter extends RecyclerView.Adapter<StationAdapter.ViewHolder> {
+public class StationAdapter extends RecyclerView.Adapter<StationAdapter.ViewHolder> {
 
     private static final String LOG_TAG = StationAdapter.class.getSimpleName();
     private Station[] mDataset = new Station[]{};
@@ -93,7 +93,7 @@ class StationAdapter extends RecyclerView.Adapter<StationAdapter.ViewHolder> {
     /**
      * Interface for receiving click events from cells.
      */
-    interface OnItemClickListener {
+    public interface OnItemClickListener {
         public void onClickShowDetail(Station station);
         public void onClickSelect(Station station);
     }
